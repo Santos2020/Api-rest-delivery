@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.restaurante.restfood.RestfoodApiApplication;
 import com.restaurante.restfood.domain.model.Cozinha;
+import com.restaurante.restfood.domain.repository.CozinhaRepository;
 
 public class ConsultaCozinhaMain {
 
@@ -16,9 +17,8 @@ public class ConsultaCozinhaMain {
 		ApplicationContext applicationContext = (ApplicationContext) new SpringApplicationBuilder(
 				RestfoodApiApplication.class).web(WebApplicationType.NONE).run(args);
 
-		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
-
-		List<Cozinha> cozinhas = cadastroCozinha.listar();
+		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		List<Cozinha> cozinhas = cozinhaRepository.listar();
 
 		for (Cozinha cozinha : cozinhas) {
 			System.out.println(cozinha.getNome());

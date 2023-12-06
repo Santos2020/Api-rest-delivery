@@ -1,33 +1,44 @@
-package com.restaurante.restfood.jpa;
+package com.restaurante.restfood.infrastructure.repository;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.restaurante.restfood.domain.model.Cozinha;
+import com.restaurante.restfood.domain.repository.CozinhaRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @Component
-public class CadastroCozinha {
+public class CozinhaRepositoryImpl implements CozinhaRepository {
 
 	@PersistenceContext
 	private EntityManager manager;
 
+	@Override
 	public List<Cozinha> listar() {
 		return manager.createQuery("from Cozinha", Cozinha.class).getResultList();
 	}
 
+	@Override
 	public Cozinha buscar(Long id) {
 		return manager.find(Cozinha.class, id);
 
 	}
 
 	@Transactional
-	public Cozinha adicionar(Cozinha conzinha) {
-		return manager.merge(conzinha);
+	@Override
+	public Cozinha salvar(Cozinha cozinha) {
+		return manager.merge(cozinha);
+	}
+
+	@Transactional
+	@Override
+	public void remover(Cozinha cozinha) {
+		cozinha = buscar(cozinha.getId());
+		manager.remove(cozinha);
 	}
 
 }

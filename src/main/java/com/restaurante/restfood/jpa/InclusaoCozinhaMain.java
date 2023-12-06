@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.restaurante.restfood.RestfoodApiApplication;
 import com.restaurante.restfood.domain.model.Cozinha;
+import com.restaurante.restfood.domain.repository.CozinhaRepository;
 
 public class InclusaoCozinhaMain {
 
@@ -14,16 +15,18 @@ public class InclusaoCozinhaMain {
 		ApplicationContext applicationContext = (ApplicationContext) new SpringApplicationBuilder(
 				RestfoodApiApplication.class).web(WebApplicationType.NONE).run(args);
 
-		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
-
+		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 		Cozinha cozinha1 = new Cozinha();
 		cozinha1.setNome("Brasileira");
 
 		Cozinha cozinha2 = new Cozinha();
 		cozinha2.setNome("Japonesa");
 
-		cadastroCozinha.adicionar(cozinha1);
-		cadastroCozinha.adicionar(cozinha2);
+		cozinha1 = cozinhaRepository.salvar(cozinha1);
+		cozinha2 = cozinhaRepository.salvar(cozinha2);
+		
+		System.out.printf("%d - %s\n", cozinha1.getId(), cozinha1.getNome());
+		System.out.printf("%d - %s\n", cozinha2.getId(), cozinha1.getNome());
 
 	}
 
