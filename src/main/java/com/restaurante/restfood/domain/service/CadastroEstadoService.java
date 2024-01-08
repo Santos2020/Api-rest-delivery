@@ -7,31 +7,32 @@ import org.springframework.stereotype.Service;
 
 import com.restaurante.restfood.domain.exception.EntidadeEmUsoExeption;
 import com.restaurante.restfood.domain.exception.EntidadeNaoEncrontradaExeption;
-import com.restaurante.restfood.domain.model.Cozinha;
-import com.restaurante.restfood.domain.repository.CozinhaRepository;
+import com.restaurante.restfood.domain.model.Estado;
+import com.restaurante.restfood.domain.repository.EstadoRepository;
 
 @Service
-public class CadastroCozinhaService {
+public class CadastroEstadoService {
 
 	@Autowired
-	private CozinhaRepository cozinhaRepository;
+	private EstadoRepository estadoRepository;
 
-	public Cozinha salvar(Cozinha cozinha) {
-		return cozinhaRepository.save(cozinha);
+	public Estado salvar(Estado estado) {
+		return estadoRepository.save(estado);
 
 	}
 
-	public void excluir(Long cozinhaId) {
+	public void excluir(Long estadoId) {
 		try {
-			cozinhaRepository.deleteById(cozinhaId);
+
+			estadoRepository.deleteById(estadoId);
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntidadeNaoEncrontradaExeption(
-					String.format("Não existem cadastro de cozinha %d", cozinhaId));
-	
+					String.format("Não existem cadastro de estado %d", estadoId, estadoId));
+
 		} catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoExeption(
-					String.format("Cozinha de código %d não pode ser removida, pois esta em uso", cozinhaId));
-
+					String.format("Estadoa de código %d não pode ser removida, pois esta em uso", estadoId, null));
 		}
 	}
+
 }
