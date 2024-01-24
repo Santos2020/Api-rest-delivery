@@ -65,9 +65,7 @@ public class CidadeController {
 	public ResponseEntity<?> atualizar(@PathVariable Long cidadeId,
 			@RequestBody Cidade cidade) {
 		try {
-			// Podemos usar o orElse(null) também, que retorna a instância de cidade
-			// dentro do Optional, ou null, caso ele esteja vazio,
-			// mas nesse caso, temos a responsabilidade de tomar cuidado com NullPointerException
+			
 			Cidade cidadeAtual = cidadeRepository.findById(cidadeId).orElse(null);
 			
 			if (cidadeAtual != null) {
