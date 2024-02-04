@@ -14,6 +14,8 @@ import com.restaurante.restfood.domain.model.Cozinha;
 import com.restaurante.restfood.domain.model.Restaurante;
 import com.restaurante.restfood.domain.repository.CozinhaRepository;
 import com.restaurante.restfood.domain.repository.RestauranteRepository;
+import com.restaurante.restfood.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
+import com.restaurante.restfood.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -67,5 +69,19 @@ public class testeController {
 	public List<Restaurante> restaurantesTop2(String nome) {
 		return restauranteRepository.findTop2ByNomeContaining(nome);
 	}
+	
+	@GetMapping("/restaurantes/com-frete-gratis")
+	public List<Restaurante> restaurantesPorNomeFrete(String nome){
+		
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+		
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
+		
+	}
 
 }
+	
+	
+
+
