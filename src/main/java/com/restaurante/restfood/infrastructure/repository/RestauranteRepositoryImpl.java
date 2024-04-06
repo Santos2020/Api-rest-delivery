@@ -62,11 +62,5 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 		return restauranteRepository.findAll(comFreteGratis()
 				.and(comNomeSemelhante(nome)));
 	}
-
-	@Override
-	public List<Restaurante> taxaFreteGratis(String nome) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 }
