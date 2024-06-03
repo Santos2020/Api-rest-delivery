@@ -1,7 +1,5 @@
 package com.restaurante.restfood.domain.model;
 
-import java.math.BigDecimal;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,16 +14,14 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Cidade {
-    
+
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-    @Column(nullable = false)
+	@Column(nullable = false)
 	private String nome;
-
-	private BigDecimal taxaFrete;
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)

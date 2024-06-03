@@ -2,6 +2,7 @@ package com.restaurante.restfood.infrastructure.repository;
 
 import java.util.Optional;
 
+import lombok.val;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -25,7 +26,7 @@ implements CustomJpaRepository<T, ID>{
 	}
 
 	public Optional<T> buscarPrimeiro(){
-		var jpql = " from " + getDomainClass().getName();
+		val jpql = " from " + getDomainClass().getName();
 	 T entity = manager.createQuery(jpql, getDomainClass())
 		.setMaxResults(1)
 		.getSingleResult();

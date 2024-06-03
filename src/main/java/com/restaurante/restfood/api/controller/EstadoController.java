@@ -34,6 +34,7 @@ public class EstadoController {
 		return estadoRepository.findAll();
 	}
 	
+
 	@GetMapping("/{estadoId}")
 	public Estado buscar(@PathVariable Long estadoId) {
 		return cadastroEstado.buscarOuFalhar(estadoId);
@@ -44,16 +45,6 @@ public class EstadoController {
 	public Estado adicionar(@RequestBody Estado estado) {
 		return cadastroEstado.salvar(estado);
 	}
-	
-//	@PutMapping("/{estadoId}")
-//	public Estado atualizar(@PathVariable Long estadoId,
-//			@RequestBody Estado estado) {
-//		Estado estadoAtual = cadastroEstado.buscarOuFalhar(estadoId);
-//		
-//		BeanUtils.copyProperties(estado, estadoAtual, "id");
-//		
-//		return cadastroEstado.salvar(estadoAtual);
-//	}
 	
 	@PutMapping("/{estadoId}")
 	public Estado atualizar(@PathVariable Long estadoId,
